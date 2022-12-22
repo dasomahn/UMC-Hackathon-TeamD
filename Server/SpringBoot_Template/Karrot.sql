@@ -3,6 +3,7 @@
                         `email`	text	NOT NULL,
                         `phoneNum`	bigint	NOT NULL,
                         `nickName`	varchar(20)	NOT NULL,
+                        `manner`    float       NOT NULL    DEFAULT 36.5,
                         `profileImgUrl`	text	NULL,
                         `createdAt`	datetime	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
                         `updatedAt`	datetime	NOT NULL	DEFAULT CURRENT_TIMESTAMP  ON UPDATE CURRENT_TIMESTAMP,
