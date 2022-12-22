@@ -21,4 +21,7 @@ public class GetPostRes {
     private Date createdAt;
     private String content;
     private String imgURL;
+
+    private int price;
+    private String wantNego;
 }

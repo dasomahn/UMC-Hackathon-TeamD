@@ -71,7 +71,11 @@ public class HomeDao {
                         rs.getInt("categoryIdx"),
                         rs.getDate("createdAt"),
                         rs.getString("content"),
-                        rs.getString("imgUrl")
+                        rs.getString("imgUrl"),
+
+                        rs.getInt("price"),
+                        rs.getString("wantNego")
+
                 ), idx);
     }
     
