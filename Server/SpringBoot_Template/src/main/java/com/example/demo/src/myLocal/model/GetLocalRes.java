@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 @Getter
 @Setter
@@ -12,11 +12,14 @@ import java.util.Date;
 public class GetLocalRes {
     private int idx;
     private int categoryIdx;
+    private String cateName;
     private String content;
 
+    private int userIdx;
     private String nickname;
-    private int regionIdx;
-    private Date createdAt;
+//    private int regionIdx;
+    private String region;
+    private Timestamp createdAt;
     private String imgURL;
     // interested/like, reply/comment 제외
 }

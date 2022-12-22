@@ -1,6 +1,5 @@
 package com.example.demo.src.myLocal;
 
-import com.example.demo.src.home.model.GetHomeRes;
 import com.example.demo.src.myLocal.model.GetLocalRes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -32,19 +31,23 @@ public class MyLocalDao {
         String getPostTable  = "select * from LocalPost where status = 'ACTIVE'" +
                 " and regionIdx in (" + getRegionRange + ")";
 
-        String query = "select U.nickname, P.* from User as U, (" + getPostTable + ") as P " +
-                "where U.idx = P.userIdx";
+        String query = "select U.nickname, P.*, C.name as cateName, R.name as region" +
+                " from User as U, (" + getPostTable + ") as P, LocalCategory as C, Region as R" +
+                " where P.userIdx = U.idx and P.categoryIdx = C.idx and P.regionIdx = R.idx";
 
         System.out.println("query = " + query);
         return this.jdbcTemplate.query(query,
                 (rs, rowNum) -> new GetLocalRes(
                         rs.getInt("idx"),
                         rs.getInt("categoryIdx"),
+                        rs.getString("cateName"),
                         rs.getString("content"),
 
+                        rs.getInt("userIdx"),
                         rs.getString("nickname"),
-                        rs.getInt("regionIdx"),
-                        rs.getDate("createdAt"),
+//                        rs.getInt("regionIdx"),
+                        rs.getString("region"),
+                        rs.getTimestamp("createdAt"),
                         rs.getString("imgURL")
                 ));
     }
