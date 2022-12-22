@@ -22,8 +22,13 @@ public class HomeProvider {
     }
 
     // Home화면 (거래글 list) GET
-    public List<GetHomeRes> getHome() {
-        return homeDao.getHome();
+    public List<GetHomeRes> getHome() throws BaseException {
+        try {
+            List<GetHomeRes> getHomeResList = homeDao.getHome();
+            return getHomeResList;
+        } catch (Exception e) {
+            throw new BaseException(DATABASE_ERROR);
+        }
     }
 
     // 물건 상세 보기 - idx로 GET

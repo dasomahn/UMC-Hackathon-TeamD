@@ -11,10 +11,12 @@ import java.sql.Date;
 @AllArgsConstructor
 public class GetHomeRes {
     private int idx;
+    private String  imgURL;
     private String title;
     private int regionIdx;
     private Date createdAt;
-    private String  imgURL;
+    private String type;
+    private int price;
 
     /*
     private int favNum;

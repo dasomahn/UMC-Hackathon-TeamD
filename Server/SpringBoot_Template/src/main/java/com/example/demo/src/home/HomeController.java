@@ -28,8 +28,13 @@ public class HomeController {
     @ResponseBody
     @GetMapping("") // 홈 화면
     public BaseResponse<List<GetHomeRes>> getHome() {
-        List<GetHomeRes> getHomeResList = homeProvider.getHome();
-        return new BaseResponse<>(getHomeResList);
+        try {
+            List<GetHomeRes> getHomeResList = homeProvider.getHome();
+            return new BaseResponse<>(getHomeResList);
+        }
+        catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
+        }
     }
 
     /**

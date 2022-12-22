@@ -1,6 +1,6 @@
 package com.example.demo.src.home;
 
-import com.example.demo.src.home.model.*
+import com.example.demo.src.home.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -45,10 +45,12 @@ public class HomeDao {
         return this.jdbcTemplate.query(query,
                 (rs, rowNum) -> new GetHomeRes(
                         rs.getInt("idx"),
+                        rs.getString("imgURL"),
                         rs.getString("title"),
                         rs.getInt("regionIdx"),
                         rs.getDate("createdAt"),
-                        rs.getString("imgUrl")
+                        rs.getString("type"),
+                        rs.getInt("price")
                 ));
     }
 
