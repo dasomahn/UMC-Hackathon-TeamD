@@ -27,7 +27,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
                 val chatAdapter = ChatAdapter(dataList)
 
                 dataList.apply {
-                        add(ChatModel("대화 내용입니다","강남", "UMC", 2))
+                        add(ChatModel("대화 내용입니다","강남", "MC", 2))
                         add(ChatModel("대화 내용2입니다", "개포", "D조", 3))
                         add(ChatModel("대화 내용3입니다", "개포", "채니", 3))
                         add(ChatModel("대화 내용4입니다", "개포", "솜", 3))
