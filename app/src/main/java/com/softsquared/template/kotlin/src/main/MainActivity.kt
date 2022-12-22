@@ -6,6 +6,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.softsquared.template.kotlin.R
 import com.softsquared.template.kotlin.config.BaseActivity
 import com.softsquared.template.kotlin.databinding.ActivityMainBinding
+import com.softsquared.template.kotlin.src.main.chat.ChatFragment
 import com.softsquared.template.kotlin.src.main.home.HomeFragment
 import com.softsquared.template.kotlin.src.main.myPage.MyPageFragment
 import com.softsquared.template.kotlin.src.main.townLife.TownLifeFragment
@@ -38,7 +39,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                     }
                     R.id.menu_main_btm_nav_chatting -> {
                         supportFragmentManager.beginTransaction()
-                            .replace(R.id.main_frm, TownLifeFragment())
+                            .replace(R.id.main_frm, ChatFragment())
                             .commitAllowingStateLoss()
                     }
                     R.id.menu_main_btm_nav_my_page -> {
