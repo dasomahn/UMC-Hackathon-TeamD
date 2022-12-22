@@ -1,10 +1,12 @@
 package com.example.demo.src.home;
 
+import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
-import com.example.demo.src.home.model.GetHomeRes;
+import com.example.demo.src.home.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,5 +30,22 @@ public class HomeController {
     public BaseResponse<List<GetHomeRes>> getHome() {
         List<GetHomeRes> getHomeResList = homeProvider.getHome();
         return new BaseResponse<>(getHomeResList);
+    }
+
+    /**
+     * 물건 상세보기 API (글 번호로 보기)
+     * [GET] /:postIdx
+     * */
+    @ResponseBody
+    @GetMapping("/{postIdx}")
+    public BaseResponse<GetPostRes> getPostByIdx(@PathVariable("postIdx") int idx) {
+        try {
+            System.out.println("idx = " + idx);
+            GetPostRes getPostRes = homeProvider.getPostByIdx(idx);
+            return new BaseResponse<>(getPostRes);
+        }
+        catch (BaseException e){
+            return new BaseResponse<>(e.getStatus());
+        }
     }
 }

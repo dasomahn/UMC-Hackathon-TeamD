@@ -1,6 +1,7 @@
 package com.example.demo.src.home;
 
 import com.example.demo.src.home.model.GetHomeRes;
+import com.example.demo.src.home.model.GetPostRes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -50,5 +51,26 @@ public class HomeDao {
                         rs.getDate("createdAt"),
                         rs.getString("imgUrl")
                 ));
+    }
+
+    // 물건 상세 보기
+    public GetPostRes getPostByIdx(int idx) {
+        String query = "select p.*, User.manner from SellPost as p, User where p.idx = ? and p.status = 'ACTIVE'" +
+                " and p.sellerIdx = User.idx";
+
+        return this.jdbcTemplate.queryForObject(query,
+                (rs, rowNum) -> new GetPostRes(
+                        rs.getInt("idx"),
+                        rs.getInt("sellerIdx"),
+                        rs.getInt("regionIdx"),
+                        rs.getFloat("manner"),
+
+                        rs.getString("type"),
+                        rs.getString("title"),
+                        rs.getInt("categoryIdx"),
+                        rs.getDate("createdAt"),
+                        rs.getString("content"),
+                        rs.getString("imgUrl")
+                ), idx);
     }
 }
