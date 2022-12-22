@@ -2,51 +2,38 @@ package com.softsquared.template.kotlin.src.main.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ListAdapter
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.softsquared.template.kotlin.databinding.ItemArticleBinding
-import com.softsquared.template.kotlin.src.main.home.models.ArticleModel
-import java.text.SimpleDateFormat
 import java.util.*
 
-class ArticleAdapter : ListAdapter<ArticleModel, ArticleAdapter.ViewHolder>(diffUtil){
-    inner class ViewHolder (private val binding: ItemArticleBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(articleModel: ArticleModel){
-            val format = SimpleDateFormat("MM년dd일")
-            val date = Date(articleModel.createAt)
+class ArticleAdapter(val items: ArrayList<ArticleModel>) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>(){
 
-            binding.titleTextView.text = articleModel.title
-            binding.dateTextView.text = format.format(date).toString()
-            binding.priceTextView.text = articleModel.price
-            if(articleModel.imageUrl.isNotEmpty()){
-                Glide.with(binding.thumbnailImageView)
-                    .load(articleModel.imageUrl)
-                    .into(binding.thumbnailImageView)
-            }
-        }
+
+    inner class ViewHolder(val binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root) {
+
+
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ViewHolder(ItemArticleBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = ItemArticleBinding.inflate(LayoutInflater.from(parent.context),  parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(currentList[position])
-    }
 
-    companion object{
-        val diffUtil = object  : DiffUtil.ItemCallback<ArticleModel>(){
-            override fun areItemsTheSame(oldItem: ArticleModel, newItem: ArticleModel): Boolean {
-                return oldItem.createdAt == newItem.createdAt
-            }
-
-            override fun areContentsTheSame(oldItem: ArticleModel, newItem: ArticleModel): Boolean {
-                return oldItem == newItem
-            }
+        holder.binding.apply {
+            context.text = items[position].contxt.toString()
+            location.text = items[position].loc.toString()
+            price.text = items[position].cost.toString()
         }
     }
-}
-        }
+
+
+    override fun getItemCount(): Int {
+        return items.size
     }
+
+
 }
+
+

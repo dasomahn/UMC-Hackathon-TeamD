@@ -3,56 +3,40 @@ package com.softsquared.template.kotlin.src.main.home
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.softsquared.template.kotlin.R
 import com.softsquared.template.kotlin.config.BaseFragment
 import com.softsquared.template.kotlin.databinding.FragmentHomeBinding
+import com.softsquared.template.kotlin.src.main.MainActivity
 import com.softsquared.template.kotlin.src.main.home.models.PostSignUpRequest
 import com.softsquared.template.kotlin.src.main.home.models.SignUpResponse
 import com.softsquared.template.kotlin.src.main.home.models.UserResponse
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home),
-        HomeFragmentInterface {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        private lateinit var binding: FragmentHomeBinding
 
-        binding.homeButtonTryGetJwt.setOnClickListener {
-            showLoadingDialog(requireContext())
-            HomeService(this).tryGetUsers()
+        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+                super.onViewCreated(view, savedInstanceState)
+                val fragmentHomeBinding = FragmentHomeBinding.bind(view)
+                binding = fragmentHomeBinding
+
+                val dataList: ArrayList<ArticleModel> = arrayListOf()
+                val articleAdapter = ArticleAdapter(dataList)
+
+                dataList.apply {
+                        add(ArticleModel("게시글 내용입니다.","강남", 2000))
+                        add(ArticleModel("게시글 내용2", "개포", 3000))
+                        add(ArticleModel("게시글 내용3", "개포", 2000))
+                        add(ArticleModel("게시글 내용4", "개포", 2000))
+                        add(ArticleModel("게시글 내용5", "개포",2000))
+                        add(ArticleModel("게시글 내용..", "개포",2000))
+
+                }
+                articleAdapter.notifyItemInserted(dataList.size)
+
+                binding.rvData.adapter = articleAdapter
+                binding.rvData.layoutManager = LinearLayoutManager(activity)
         }
-
-        binding.homeBtnTryPostHttpMethod.setOnClickListener {
-            val email = binding.homeEtId.text.toString()
-            val password = binding.homeEtPw.text.toString()
-            val postRequest = PostSignUpRequest(email = email, password = password,
-                    confirmPassword = password, nickname = "test", phoneNumber = "010-0000-0000")
-            showLoadingDialog(requireContext())
-            HomeService(this).tryPostSignUp(postRequest)
-        }
-    }
-
-    override fun onGetUserSuccess(response: UserResponse) {
-        dismissLoadingDialog()
-        for (User in response.result) {
-            Log.d("HomeFragment", User.toString())
-        }
-        binding.homeButtonTryGetJwt.text = response.message
-        showCustomToast("Get JWT 성공")
-    }
-
-    override fun onGetUserFailure(message: String) {
-        dismissLoadingDialog()
-        showCustomToast("오류 : $message")
-    }
-
-    override fun onPostSignUpSuccess(response: SignUpResponse) {
-        dismissLoadingDialog()
-        binding.homeBtnTryPostHttpMethod.text = response.message
-        response.message?.let { showCustomToast(it) }
-    }
-
-    override fun onPostSignUpFailure(message: String) {
-        dismissLoadingDialog()
-        showCustomToast("오류 : $message")
-    }
 }
