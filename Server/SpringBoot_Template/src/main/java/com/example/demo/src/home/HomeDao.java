@@ -60,19 +60,23 @@ public class HomeDao {
 
     // 물건 상세 보기
     public GetPostRes getPostByIdx(int idx) {
-        String query = "select p.*, User.manner, Region.name from SellPost as p, User, Region where p.idx = ? and p.status = 'ACTIVE'" +
-                " and p.sellerIdx = User.idx and p.regionIdx = Region.idx";
+        String query = "select P.*, User.manner, Region.name, User.nickname, C.name as cateName" +
+                " from SellPost as P, User, Region, SellCategory as C" +
+                " where P.idx = ? and P.status = 'ACTIVE'" +
+                " and P.sellerIdx = User.idx and P.regionIdx = Region.idx and P.categoryIdx = C.idx";
 
         return this.jdbcTemplate.queryForObject(query,
                 (rs, rowNum) -> new GetPostRes(
                         rs.getInt("idx"),
                         rs.getInt("sellerIdx"),
+                        rs.getString("nickname"),
                         rs.getString("name"),
                         rs.getFloat("manner"),
 
                         rs.getString("type"),
                         rs.getString("title"),
                         rs.getInt("categoryIdx"),
+                        rs.getString("cateName"),
                         rs.getTimestamp("createdAt"),
                         rs.getString("content"),
                         rs.getString("imgUrl"),

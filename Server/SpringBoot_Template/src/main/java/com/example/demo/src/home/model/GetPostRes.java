@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 public class GetPostRes {
     private int idx;
     private int sellerIdx;
+    private String nickname;
 //    private int regionIdx;
     private String region;
     private float manner;
@@ -19,6 +20,7 @@ public class GetPostRes {
     private String type;
     private String title;
     private int categoryIdx;
+    private String cateName;
     private Timestamp createdAt;
     private String content;
     private String imgURL;
