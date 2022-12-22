@@ -3,11 +3,11 @@ package com.softsquared.template.kotlin.src.main.townLife
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.softsquared.template.kotlin.R
 import com.softsquared.template.kotlin.config.BaseFragment
 import com.softsquared.template.kotlin.databinding.FragmentTownLifeBinding
-import com.softsquared.template.kotlin.databinding.ItemKeywordBinding
 import com.softsquared.template.kotlin.src.main.myPage.MyPageProfileActivity
 
 class TownLifeFragment :
@@ -40,25 +40,36 @@ class TownLifeFragment :
 
         keywordRVAdapter.setKeywordClickListener(object : KeywordRVAdapter.KeywordClickListener {
             override fun onKeywordClick(position: Int) {
-                val intent = Intent(this@TownLifeFragment.context, MyPageProfileActivity::class.java)
+                val intent = Intent(this@TownLifeFragment.context, TownLifeCategoryActivity::class.java)
 
                 startActivity(intent)
             }
         })
 
-        val postDataList: ArrayList<TownLifeArticleItemHolder> = arrayListOf()
-        val postAdapter = TownLifeArticleRVAdapter(postDataList)
+        val townLifeDataList: ArrayList<TownLifeArticleItemHolder> = arrayListOf()
+        val townLifeArticleAdapter = TownLifeArticleRVAdapter(townLifeDataList)
 
-        postDataList.apply {
-            add(
-                TownLifeArticleItemHolder("이건 내용입니다", "지역" + "·", "시간"
-                        , 1 , 2 , "" , "카테고리")
-            )
+        townLifeDataList.apply {
+            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
+            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
+            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
+            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
+            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
+            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
+            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
+            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
+            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
+            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
+            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
+            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
+            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
+            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
+            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
         }
 
-        postAdapter.notifyItemInserted(postDataList.size)
-        binding.mainPost.adapter = postAdapter
-        binding.mainPost.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+        townLifeArticleAdapter.notifyItemInserted(townLifeDataList.size)
+        binding.mainPost.adapter = townLifeArticleAdapter
+        binding.mainPost.layoutManager = GridLayoutManager(this.context, 2, GridLayoutManager.VERTICAL, false)
 
     }
 }

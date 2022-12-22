@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
 
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
 
                 tools:listitem="@layout/item_town_life_article" />
 

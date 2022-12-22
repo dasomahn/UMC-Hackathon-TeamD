@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="15dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/item_town_life_article_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+
+        app:layout_constraintTop_toTopOf="@id/item_town_life_article_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_town_life_article_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+
+        android:text="내용입니다"
+        android:textColor="@color/black"
+        android:maxLines="2"
+        android:ellipsize="end"
+
+        app:layout_constraintEnd_toStartOf="@id/item_town_life_article_image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_town_life_article_category"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+
+        android:text="분실/실종·"
+        android:textSize="12sp"
+        android:textColor="#16A2F1"
+        android:visibility="gone"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_town_life_article_content"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_town_life_article_region"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+
+        android:text="지역·"
+        android:textSize="12sp"
+
+        app:layout_constraintTop_toBottomOf="@+id/item_town_life_article_content"
+        app:layout_constraintStart_toEndOf="@id/item_town_life_article_category"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_town_life_article_time"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+
+        android:text="시간"
+        android:textSize="12sp"
+
+        app:layout_constraintTop_toBottomOf="@id/item_town_life_article_content"
+        app:layout_constraintStart_toEndOf="@id/item_town_life_article_region"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/item_town_life_article_comment"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="10dp"
+
+        android:src="@drawable/ic_feed_reply_outline_18"
+        android:visibility="gone"
+
+        app:layout_constraintTop_toBottomOf="@+id/item_town_life_article_region"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_town_life_article_comment_num"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginStart="5dp"
+
+        android:text="댓글 수"
+        android:textColor="@color/black"
+        android:visibility="gone"
+
+        app:layout_constraintTop_toTopOf="@id/item_town_life_article_comment"
+        app:layout_constraintBottom_toBottomOf="@id/item_town_life_article_comment"
+        app:layout_constraintStart_toEndOf="@id/item_town_life_article_comment"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/item_town_life_article_like"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="5dp"
+
+        android:src="@drawable/ic_heart"
+        android:visibility="gone"
+
+        app:layout_constraintTop_toTopOf="@+id/item_town_life_article_comment"
+        app:layout_constraintStart_toEndOf="@id/item_town_life_article_comment_num"
+        app:layout_constraintBottom_toBottomOf="@id/item_town_life_article_comment"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_town_life_article_like_num"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginStart="5dp"
+
+        android:text="공감 수"
+        android:textColor="@color/black"
+        android:visibility="gone"
+
+        app:layout_constraintTop_toTopOf="@id/item_town_life_article_comment"
+        app:layout_constraintBottom_toBottomOf="@id/item_town_life_article_comment"
+        app:layout_constraintStart_toEndOf="@id/item_town_life_article_like"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="20dp"
+
+        android:background="#F2F3F7"
+        app:layout_constraintTop_toBottomOf="@id/item_town_life_article_comment"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

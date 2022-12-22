@@ -8,6 +8,9 @@
 
     <!-- Main -->
     <string name="main_btm_nav_home_title">홈</string>
+    <string name="main_btm_nav_town_life">동네생활</string>
+    <string name="main_btm_nav_location">내 근처</string>
+    <string name="main_btm_nav_chatting">채팅</string>
     <string name="main_btm_nav_my_page_title">나의 당근</string>
 
     <!-- Home -->

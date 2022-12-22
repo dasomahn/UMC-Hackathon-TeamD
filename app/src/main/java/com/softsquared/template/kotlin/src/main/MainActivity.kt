@@ -1,5 +1,6 @@
 package com.softsquared.template.kotlin.src.main
 
+import android.graphics.Color
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.softsquared.template.kotlin.R
@@ -16,6 +17,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
         supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment()).commitAllowingStateLoss()
 
+        binding.mainBtmNav.itemIconTintList = null
         binding.mainBtmNav.run {
             setOnItemSelectedListener { item ->
                 when (item.itemId) {
@@ -24,9 +26,24 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                             .replace(R.id.main_frm, HomeFragment())
                             .commitAllowingStateLoss()
                     }
-                    R.id.menu_main_btm_nav_my_page -> {
+                    R.id.menu_main_btm_nav_town_life -> {
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.main_frm, TownLifeFragment())
+                            .commitAllowingStateLoss()
+                    }
+                    R.id.menu_main_btm_nav_location -> {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.main_frm, TownLifeFragment())
+                            .commitAllowingStateLoss()
+                    }
+                    R.id.menu_main_btm_nav_chatting -> {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.main_frm, TownLifeFragment())
+                            .commitAllowingStateLoss()
+                    }
+                    R.id.menu_main_btm_nav_my_page -> {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.main_frm, MyPageFragment())
                             .commitAllowingStateLoss()
                     }
                 }

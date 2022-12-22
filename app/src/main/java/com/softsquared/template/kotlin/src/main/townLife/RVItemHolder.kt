@@ -7,6 +7,12 @@ data class KeywordItemHolder(
 
 data class TownLifeArticleItemHolder(
     val content: String,
+    val info: String,
+    val category: String
+)
+
+data class TownLifeCategoryArticleItemHolder(
+    val content: String,
     val region: String,
     val time: String,
     val commentNum: Int,

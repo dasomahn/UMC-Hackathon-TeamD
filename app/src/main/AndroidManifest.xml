@@ -15,6 +15,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".src.main.townLife.TownLifeCategoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".src.main.myPage.MyPageProfileUpdateActivity"
             android:exported="false" />
         <activity

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_town_life_inactivate" android:state_checked="false"
+        android:title="@string/main_btm_nav_town_life" />
+    <item android:drawable="@drawable/ic_town_life_activate" android:state_checked="true"
+        android:title="@string/main_btm_nav_town_life" />
+</selector>

@@ -18,7 +18,7 @@ class KeywordRVAdapter(private val dataList: ArrayList<KeywordItemHolder>):
         keywordClickListener = story
     }
 
-    inner class ItemViewHolder(private val binding: ItemKeywordBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ItemViewHolder(val binding: ItemKeywordBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: KeywordItemHolder) {
             binding.itemKeywordTxt.text = data.keyword
             if(data.image != 0)
@@ -33,6 +33,11 @@ class KeywordRVAdapter(private val dataList: ArrayList<KeywordItemHolder>):
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.bind(dataList[position])
+
+        holder.binding.root.setOnClickListener {
+            keywordClickListener.onKeywordClick(position)
+        }
+
         holder.setIsRecyclable(false)
     }
 
