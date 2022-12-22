@@ -133,13 +133,43 @@ CREATE TABLE `Review` (
                           `idx`	bigint	auto_increment NOT NULL primary key,
                           `postIdx`	bigint	NOT NULL,
                           `overall`	varchar(5)	NULL	DEFAULT 'GREAT'	COMMENT 'BAD GOOD GREAT',
-                          `happy`	text	NULL	COMMENT '1, 2, 3, 4 식으로',
                           `content`	text	NULL,
                           `imgURL`	text	NULL,
                           `createdAt`	datetime	NULL	DEFAULT CURRENT_TIMESTAMP,
                           `updatedAt`	datetime	NOT NULL	DEFAULT CURRENT_TIMESTAMP  ON UPDATE CURRENT_TIMESTAMP,
-                          `status`	varchar(10)	NULL	DEFAULT 'ACTIVE'	COMMENT 'DELETED HIDDEN'
+                          `status`	varchar(10)	NULL	DEFAULT 'ACTIVE'	COMMENT 'DELETED'
 );
+
+CREATE TABLE `ReviewKeyword` (
+                                 `idx`	bigint	auto_increment NOT NULL primary key,
+                                 `postIdx`	bigint	NOT NULL,
+                                 `isCome`	int	NOT NULL	DEFAULT 0	COMMENT '1일경우 근처까지 와서 거래',
+                                 `isNice`	int	NOT NULL	DEFAULT 0	COMMENT '1일경우 친절하고 매너가좋아요',
+                                 `onTime`	int	NOT NULL	DEFAULT 0	COMMENT '1일 경우 시간 약속을 잘 지켜요',
+                                 `isFast`	int	NOT NULL	DEFAULT 0	COMMENT '1일경우 응답이 빨라요',
+                                 `createdAt`	datetime	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
+                                 `updatedAt`	datetime	NOT NULL	DEFAULT CURRENT_TIMESTAMP  ON UPDATE CURRENT_TIMESTAMP,
+                                 `status`	varchar(10)	NOT NULL	DEFAULT 'ACTIVE'
+);
+
+CREATE TABLE `BadgeCollection` (
+                                   `idx`	bigint	auto_increment NOT NULL primary key,
+                                   `userIdx`	bigint	NOT NULL,
+                                   `badgeIdx`	int	NOT NULL,
+                                   `createdAt`	datetime	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
+                                   `updatedAt`	datetime	NOT NULL	DEFAULT CURRENT_TIMESTAMP  ON UPDATE CURRENT_TIMESTAMP,
+                                   `status`	varchar(10)	NULL	DEFAULT 'ACTIVE'
+);
+
+CREATE TABLE `Badge` (
+                         `idx`	int	auto_increment NOT NULL primary key,
+                         `name`	varchar(15)	NULL,
+                         `createdAt`	datetime	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
+                         `updatedAt`	datetime	NOT NULL	DEFAULT CURRENT_TIMESTAMP  ON UPDATE CURRENT_TIMESTAMP,
+                         `status`	varchar(10)	NULL	DEFAULT 'ACTIVE'
+);
+
+# foreign key
 
 ALTER TABLE `SellPost` ADD CONSTRAINT `FK_User_TO_SellPost_1` FOREIGN KEY (
                                                                            `sellerIdx`
@@ -280,3 +310,32 @@ ALTER TABLE `Review` ADD CONSTRAINT `FK_SellPost_TO_Review_1` FOREIGN KEY (
     REFERENCES `SellPost` (
                            `idx`
         );
+
+ALTER TABLE `Review` ADD CONSTRAINT `FK_SellPost_TO_Review_1` FOREIGN KEY (
+                                                                           `postIdx`
+    )
+    REFERENCES `SellPost` (
+                           `idx`
+        );
+
+ALTER TABLE `ReviewKeyword` ADD CONSTRAINT `FK_SellPost_TO_ReviewKeyword_1` FOREIGN KEY (
+                                                                                         `postIdx`
+    )
+    REFERENCES `SellPost` (
+                           `idx`
+        );
+
+ALTER TABLE `BadgeCollection` ADD CONSTRAINT `FK_User_TO_BadgeCollection_1` FOREIGN KEY (
+                                                                                         `userIdx`
+    )
+    REFERENCES `User` (
+                       `idx`
+        );
+
+ALTER TABLE `BadgeCollection` ADD CONSTRAINT `FK_Badge_TO_BadgeCollection_1` FOREIGN KEY (
+                                                                                          `badgeIdx`
+    )
+    REFERENCES `Badge` (
+                        `idx`
+        );
+
