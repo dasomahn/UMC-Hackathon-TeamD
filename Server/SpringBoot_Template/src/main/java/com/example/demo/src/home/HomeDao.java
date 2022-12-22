@@ -28,9 +28,11 @@ public class HomeDao {
         String getRegionRange = "select Region.idx from Region, (" + getCurRegion + ") AS S " +
                 "WHERE Region.idx BETWEEN (S.regionIdx - S.regionRange) AND (S.regionIdx + S.regionRange)";
 
-
-        String query = "select * from SellPost where status = 'ACTIVE'" + // active 상태
+        String getPostTable = "select * from SellPost where status = 'ACTIVE'" + // active 상태
                 " and regionIdx in (" + getRegionRange + ")"; // 설정한 동네 근처
+
+        String query = "select R.name, P.* from Region as R, (" + getPostTable + ") as P" +
+                " where R.idx = P.regionIdx";
         /*
         select * from SellPost
          where status = 'ACTIVE' and regionIdx in (
@@ -39,6 +41,7 @@ public class HomeDao {
                     WHEN selected = 1 then region1
                     WHEN selected = 2 then region2 END as regionIdx FROM RegionSettings where userIdx = 1) AS S
             WHERE Region.idx BETWEEN (S.regionIdx - S.regionRange) AND (S.regionIdx + S.regionRange) )
+         를 이제 한번 더 감싼
          */
 
         // 좋아요수, 채팅수도 가져오기!
@@ -47,8 +50,9 @@ public class HomeDao {
                         rs.getInt("idx"),
                         rs.getString("imgURL"),
                         rs.getString("title"),
-                        rs.getInt("regionIdx"),
-                        rs.getDate("createdAt"),
+//                        rs.getInt("regionIdx"),
+                        rs.getString("name"),
+                        rs.getTimestamp("createdAt"),
                         rs.getString("type"),
                         rs.getInt("price")
                 ));
@@ -56,20 +60,24 @@ public class HomeDao {
 
     // 물건 상세 보기
     public GetPostRes getPostByIdx(int idx) {
-        String query = "select p.*, User.manner from SellPost as p, User where p.idx = ? and p.status = 'ACTIVE'" +
-                " and p.sellerIdx = User.idx";
+        String query = "select P.*, User.manner, Region.name, User.nickname, C.name as cateName" +
+                " from SellPost as P, User, Region, SellCategory as C" +
+                " where P.idx = ? and P.status = 'ACTIVE'" +
+                " and P.sellerIdx = User.idx and P.regionIdx = Region.idx and P.categoryIdx = C.idx";
 
         return this.jdbcTemplate.queryForObject(query,
                 (rs, rowNum) -> new GetPostRes(
                         rs.getInt("idx"),
                         rs.getInt("sellerIdx"),
-                        rs.getInt("regionIdx"),
+                        rs.getString("nickname"),
+                        rs.getString("name"),
                         rs.getFloat("manner"),
 
                         rs.getString("type"),
                         rs.getString("title"),
                         rs.getInt("categoryIdx"),
-                        rs.getDate("createdAt"),
+                        rs.getString("cateName"),
+                        rs.getTimestamp("createdAt"),
                         rs.getString("content"),
                         rs.getString("imgUrl"),
 
@@ -102,17 +110,20 @@ public class HomeDao {
                 "WHERE Region.idx BETWEEN (S.regionIdx - S.regionRange) AND (S.regionIdx + S.regionRange)";
 
 
-        String query = "select * from SellPost where status = 'ACTIVE'" + // active 상태
+        String getPostTable = "select * from SellPost where status = 'ACTIVE'" + // active 상태
                 " and regionIdx in (" + getRegionRange + ")" + // 설정한 동네 근처
                 " and title LIKE \"%" + keyword +"%\""; // 글 검색
 
+        String query = "select R.name, P.* from Region as R, (" + getPostTable + ") as P" +
+                " where R.idx = P.regionIdx";
         return this.jdbcTemplate.query(query,
                 (rs, rowNum) -> new GetHomeRes(
                         rs.getInt("idx"),
                         rs.getString("imgURL"),
                         rs.getString("title"),
-                        rs.getInt("regionIdx"),
-                        rs.getDate("createdAt"),
+//                        rs.getInt("regionIdx"),
+                        rs.getString("name"),
+                        rs.getTimestamp("createdAt"),
                         rs.getString("type"),
                         rs.getInt("price")
                 ));

@@ -61,6 +61,7 @@ public class HomeProvider {
             List<GetHomeRes> getHomeResList = homeDao.getHomeSearch(keyword);
             return getHomeResList;
         } catch (Exception e) {
+            System.out.println(e);
             throw new BaseException((DATABASE_ERROR));
         }
     }
