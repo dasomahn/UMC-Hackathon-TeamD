@@ -1,7 +1,6 @@
 package com.example.demo.src.home;
 
-import com.example.demo.src.home.model.GetHomeRes;
-import com.example.demo.src.home.model.GetPostRes;
+import com.example.demo.src.home.model.*
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -72,5 +71,15 @@ public class HomeDao {
                         rs.getString("content"),
                         rs.getString("imgUrl")
                 ), idx);
+    }
+    
+    // 카테고리 전체 조회
+    public List<GetCateRes> getAllCate() {
+        String query = "select idx, name from SellCategory where status = 'ACTIVE'";
+        return this.jdbcTemplate.query(query,
+                (rs, rowNum) -> new GetCateRes(
+                        rs.getInt("idx"),
+                        rs.getString("name")
+                ));
     }
 }

@@ -39,4 +39,15 @@ public class HomeProvider {
         }
     }
 
+    // 카테고리 종류 조회 GET
+    public List<GetCateRes> getAllCate() throws BaseException {
+        try {
+            List<GetCateRes> getCateResList = homeDao.getAllCate();
+            return getCateResList;
+        } catch (Exception e) {
+            throw new BaseException((DATABASE_ERROR));
+        }
+
+    }
+
 }

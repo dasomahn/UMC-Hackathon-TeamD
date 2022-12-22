@@ -48,4 +48,20 @@ public class HomeController {
             return new BaseResponse<>(e.getStatus());
         }
     }
+
+    /**
+     * 카테고리 API (종류 조회?)
+     * [GET] /category
+     * */
+    @ResponseBody
+    @GetMapping("/category")
+    public BaseResponse<List<GetCateRes>> getAllCate() {
+        try {
+            List<GetCateRes> getCateResList = homeProvider.getAllCate();
+            return new BaseResponse<>(getCateResList);
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
+        }
+    }
+
 }
