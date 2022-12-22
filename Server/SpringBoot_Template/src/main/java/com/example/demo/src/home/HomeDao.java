@@ -19,10 +19,30 @@ public class HomeDao {
     // 홈 화면 (글 조회)
     public List<GetHomeRes> getHome() {
         String simpleQuery = "select * from SellPost";
-        String query = "select * from SellPost where ~";
-        // active상태, 설정한 동네 근처에 있는 게시글만하게 추가
-        // 좋아요수, 채팅수도 가져오기?
-        return this.jdbcTemplate.query(simpleQuery,
+        String getCurRegion = "select regionRange, " +
+                "CASE " +
+                "WHEN selected = 1 then region1 " +
+                "WHEN selected = 2 then region2 " +
+                "END as regionIdx " +
+                "FROM RegionSettings where userIdx = 1"; // 우선 user 1번으로 하드코딩
+        String getRegionRange = "select Region.idx from Region, (" + getCurRegion + ") AS S " +
+                "WHERE Region.idx BETWEEN (S.regionIdx - S.regionRange) AND (S.regionIdx + S.regionRange)";
+
+
+        String query = "select * from SellPost where status = 'ACTIVE'" + // active 상태
+                " and regionIdx in (" + getRegionRange + ")"; // 설정한 동네 근처
+        /*
+        select * from SellPost
+         where status = 'ACTIVE' and regionIdx in (
+            select Region.idx from Region, (
+                select regionRange, CASE
+                    WHEN selected = 1 then region1
+                    WHEN selected = 2 then region2 END as regionIdx FROM RegionSettings where userIdx = 1) AS S
+            WHERE Region.idx BETWEEN (S.regionIdx - S.regionRange) AND (S.regionIdx + S.regionRange) )
+         */
+
+        // 좋아요수, 채팅수도 가져오기!
+        return this.jdbcTemplate.query(query,
                 (rs, rowNum) -> new GetHomeRes(
                         rs.getInt("idx"),
                         rs.getString("title"),
