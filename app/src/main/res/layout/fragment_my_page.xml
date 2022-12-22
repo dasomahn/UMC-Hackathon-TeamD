@@ -95,6 +95,7 @@
                         android:textSize="8sp"
                         android:textColor="@color/black"
                         android:gravity="center"
+                        android:stateListAnimator="@null"
 
                         />
 
@@ -151,6 +152,7 @@
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         android:textSize="12sp"
+                        android:stateListAnimator="@null"
 
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -182,6 +184,7 @@
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         android:textSize="12sp"
+                        android:stateListAnimator="@null"
 
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -650,14 +653,6 @@
                     />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginVertical="10dp"
-
-                android:background="#F2F3F7"
-                />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

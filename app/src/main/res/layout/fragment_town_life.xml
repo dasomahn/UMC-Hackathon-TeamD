@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".src.main.townLife.TownLifeFragment"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/town_life_layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+
+        <TextView
+            android:id="@+id/town_life_txt_my_town"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:text="동네"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="38dp"
+            android:paddingRight="6dp"
+            android:src="@drawable/ic_down_arrow" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+
+        <ImageView
+            android:id="@+id/town_life_btn_search"
+            android:layout_width="28dp"
+            android:layout_height="38dp"
+            android:paddingRight="10dp"
+            android:src="@drawable/icon_search" />
+
+        <ImageView
+            android:id="@+id/town_life_btn_menu"
+            android:layout_width="28dp"
+            android:layout_height="38dp"
+            android:paddingRight="10dp"
+            android:src="@drawable/tab_icon_profile" />
+
+        <ImageView
+            android:id="@+id/town_life_btn_notice"
+            android:layout_width="28dp"
+            android:layout_height="38dp"
+            android:paddingRight="10dp"
+            android:src="@drawable/icon_notification" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/main_body"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/town_life_layout_top"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/main_story"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+                tools:listitem="@layout/item_keyword">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="5dp"
+                android:background="#F6F6F6" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/main_post"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+                tools:listitem="@layout/item_town_life_article" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

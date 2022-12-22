@@ -1,5 +1,6 @@
 package com.softsquared.template.kotlin.src.main.myPage
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.softsquared.template.kotlin.R
@@ -12,6 +13,10 @@ class MyPageFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.myPageLayoutProfileBar.setOnClickListener {
+            val intent = Intent(this.context, MyPageProfileActivity::class.java)
 
+            startActivity(intent)
+        }
     }
 }

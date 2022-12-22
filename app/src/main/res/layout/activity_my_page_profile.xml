@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".src.main.myPage.MyPageProfileActivity"
+    android:background="@color/white">
+
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/my_page_profile_btn_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginVertical="15dp"
+        android:layout_marginStart="15dp"
+        android:padding="5dp"
+
+        android:background="@color/white"
+        android:scaleType="fitCenter"
+
+        android:src="@drawable/ic_left_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginVertical="15dp"
+        android:layout_marginStart="15dp"
+
+        android:text="프로필"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/my_page_profile_btn_back"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/my_page_profile_btn_share"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginVertical="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/white"
+
+        android:src="@drawable/ic_mydaangn_share_outline_24"
+        android:scaleType="centerCrop"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/my_page_profile_scroll"
+        />
+
+    <ScrollView
+        android:id="@+id/my_page_profile_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        app:layout_constraintTop_toBottomOf="@id/my_page_profile_btn_share"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="horizontal"
+                android:layout_margin="15dp"
+                >
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/my_page_profile_img_user_image"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+
+                    android:src="@drawable/ic_user_profile_placeholder"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/my_page_profile_txt_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+
+                    android:text="닉네임입니다"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    />
+
+                <TextView
+                    android:id="@+id/my_page_profile_txt_user_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+
+                    android:text="코드입니다"
+                    android:gravity="center_vertical"
+                    />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/my_page_profile_btn_update"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="15dp"
+
+                android:text="프로필 수정"
+                android:textStyle="bold"
+                android:backgroundTint="#F2F3F7"
+                android:stateListAnimator="@null"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+
+                android:text="매너온도"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:gravity="center_vertical"
+                />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginHorizontal="15dp"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="첫 온도 36.5°C"
+                    android:textSize="10sp"
+                    android:gravity="center"
+
+                    app:layout_constraintBottom_toTopOf="@+id/my_page_profile_img_down"
+                    app:layout_constraintStart_toStartOf="@id/my_page_profile_img_down"
+                    app:layout_constraintEnd_toEndOf="@id/my_page_profile_img_down"
+                    />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/my_page_profile_img_down"
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    app:layout_constraintWidth_percent="0.73"
+
+                    android:src="@drawable/ic_down_arrow"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/my_page_profile_txt_manner_temper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+
+                    android:text="온도입니다"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+
+                    app:layout_constraintEnd_toStartOf="@id/my_page_profile_img_manner"
+                    />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/my_page_profile_img_manner"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+
+                android:max="1000"
+                android:min="0"
+
+                android:thumb="@drawable/thumb"
+                android:progressDrawable="@drawable/progressbar"
+                />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="15dp"
+                >
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+
+                    android:src="@drawable/ic_feed_interest_outline_18"
+                    android:scaleType="centerInside"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/my_page_profile_txt_manner_1"
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="8"
+
+                    android:text="재거래희망률 %"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+
+                    android:src="@drawable/ic_feed_reply_outline_18"
+                    android:scaleType="centerInside"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/my_page_profile_txt_manner_2"
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="8"
+
+                    android:text="응답률 %"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    />
+
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="15dp"
+                android:orientation="horizontal"
+                >
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+
+                    android:text="아직.."
+                    android:textSize="12sp"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+
+                    android:text="아직.."
+                    android:textSize="12sp"
+                    />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="#F2F3F7"
+                android:orientation="vertical"
+                android:paddingVertical="20dp"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginHorizontal="15dp"
+
+                    android:text="지역인증텍스트"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginHorizontal="15dp"
+
+                    android:text="최근활동, 가입일자"
+                    android:textColor="@color/black"
+                    />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/my_page_profile_btn_badge"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="15dp"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="9"
+
+                    android:text="활동 뱃지 개수"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:gravity="center_vertical"
+                    />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="0.5"
+                    android:layout_marginVertical="20dp"
+
+                    android:src="@drawable/ic_chevron_right_outline_18"
+                    android:scaleType="fitCenter"
+                    />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+
+                android:background="#F2F3F7"
+                />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/my_page_profile_btn_sold"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="15dp"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="9"
+
+                    android:text="판매 상품 개수"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:gravity="center_vertical"
+                    />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="0.5"
+                    android:layout_marginVertical="20dp"
+
+                    android:src="@drawable/ic_chevron_right_outline_18"
+                    android:scaleType="fitCenter"
+                    />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+
+                android:background="#F2F3F7"
+                />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/my_page_profile_btn_manner"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="15dp"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="9"
+
+                    android:text="받은 매너 평가"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:gravity="center_vertical"
+                    />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="0.5"
+                    android:layout_marginVertical="20dp"
+
+                    android:src="@drawable/ic_chevron_right_outline_18"
+                    android:scaleType="fitCenter"
+                    />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+
+                android:background="#F2F3F7"
+                />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/my_page_profile_btn_review"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="15dp"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="9"
+
+                    android:text="받은 거래 후기 개수"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:gravity="center_vertical"
+                    />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="0.5"
+                    android:layout_marginVertical="20dp"
+
+                    android:src="@drawable/ic_chevron_right_outline_18"
+                    android:scaleType="fitCenter"
+                    />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
