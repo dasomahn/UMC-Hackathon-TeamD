@@ -88,4 +88,33 @@ public class HomeDao {
                         rs.getString("name")
                 ));
     }
+
+    // 홈 검색
+    // getHome()과 동일해서 합치는게 좋을지 의문
+    public List<GetHomeRes> getHomeSearch(String keyword) {
+        String getCurRegion = "select regionRange, " +
+                "CASE " +
+                "WHEN selected = 1 then region1 " +
+                "WHEN selected = 2 then region2 " +
+                "END as regionIdx " +
+                "FROM RegionSettings where userIdx = 1"; // 우선 user 1번으로 하드코딩
+        String getRegionRange = "select Region.idx from Region, (" + getCurRegion + ") AS S " +
+                "WHERE Region.idx BETWEEN (S.regionIdx - S.regionRange) AND (S.regionIdx + S.regionRange)";
+
+
+        String query = "select * from SellPost where status = 'ACTIVE'" + // active 상태
+                " and regionIdx in (" + getRegionRange + ")" + // 설정한 동네 근처
+                " and title LIKE \"%" + keyword +"%\""; // 글 검색
+
+        return this.jdbcTemplate.query(query,
+                (rs, rowNum) -> new GetHomeRes(
+                        rs.getInt("idx"),
+                        rs.getString("imgURL"),
+                        rs.getString("title"),
+                        rs.getInt("regionIdx"),
+                        rs.getDate("createdAt"),
+                        rs.getString("type"),
+                        rs.getInt("price")
+                ));
+    }
 }

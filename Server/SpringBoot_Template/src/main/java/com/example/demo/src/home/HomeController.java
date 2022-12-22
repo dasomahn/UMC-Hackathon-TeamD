@@ -5,10 +5,7 @@ import com.example.demo.config.BaseResponse;
 import com.example.demo.src.home.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -64,6 +61,21 @@ public class HomeController {
         try {
             List<GetCateRes> getCateResList = homeProvider.getAllCate();
             return new BaseResponse<>(getCateResList);
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
+        }
+    }
+
+    /**
+     * 검색 API // 카테고리 기능 아직 x
+     * [GET] /search?keyword=()
+     * */
+    @ResponseBody
+    @GetMapping("/search")
+    public BaseResponse<List<GetHomeRes>> getHomeSearch(@RequestParam(value="keyword") String keyword) {
+        try {
+            List<GetHomeRes> getHomeResList = homeProvider.getHomeSearch(keyword);
+            return new BaseResponse<>(getHomeResList);
         } catch (BaseException e) {
             return new BaseResponse<>(e.getStatus());
         }

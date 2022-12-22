@@ -55,4 +55,14 @@ public class HomeProvider {
 
     }
 
+    // 키워드 검색 GET
+    public List<GetHomeRes> getHomeSearch(String keyword) throws BaseException {
+        try {
+            List<GetHomeRes> getHomeResList = homeDao.getHomeSearch(keyword);
+            return getHomeResList;
+        } catch (Exception e) {
+            throw new BaseException((DATABASE_ERROR));
+        }
+    }
+
 }
