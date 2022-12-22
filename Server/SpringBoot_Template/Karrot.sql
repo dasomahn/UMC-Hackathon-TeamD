@@ -13,6 +13,7 @@ CREATE TABLE `SellPost` (
                             `idx`	bigint	auto_increment NOT NULL primary key,
                             `sellerIdx`	bigint	NOT NULL,
                             `buyerIdx`	bigint	NULL,
+                            `regionIdx`	bigint	NOT NULL,
                             `type`	varchar(10)	NOT NULL	DEFAULT 'ACTIVE'	COMMENT 'BOOST RESERVED SOLD',
                             `title`	varchar(30)	NOT NULL,
                             `content`	text	NOT NULL,
@@ -81,6 +82,7 @@ CREATE TABLE `RegionSettings` (
                                   `region1verify`	int	NULL	COMMENT '위치 정보 (경도 위동 등)',
                                   `region2`	bigint	NOT NULL,
                                   `region2verify`	int	NOT NULL,
+                                  `select`	int     NOT NULL	DEFAULT 1	COMMENT '1 또는 2 지역 설정',
                                   `createdAt`	datetime	NOT NULL	DEFAULT CURRENT_TIMESTAMP,
                                   `updatedAt`	datetime	NOT NULL	DEFAULT CURRENT_TIMESTAMP  ON UPDATE CURRENT_TIMESTAMP,
                                   `status`	varchar(10)	NOT NULL	DEFAULT 'ACTIVE'	COMMENT 'DELETED'
