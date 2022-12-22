@@ -24,7 +24,7 @@ class ArticleAdapter(val items: ArrayList<ArticleModel>) : RecyclerView.Adapter<
         holder.binding.apply {
             context.text = items[position].contxt.toString()
             location.text = items[position].loc.toString()
-            price.text = items[position].cost.toString()
+            price.text = items[position].cost.toInt().toString()+"원"
         }
     }
 
