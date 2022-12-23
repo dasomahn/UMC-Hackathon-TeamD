@@ -2,6 +2,7 @@ package com.example.demo.src.daangn;
 
 import com.example.demo.config.BaseException;
 import com.example.demo.src.daangn.model.GetInfoProfileRes;
+import com.example.demo.src.daangn.model.GetInfoReviewRes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,17 @@ public class DaangnProvider {
             GetInfoProfileRes getInfoProfileRes = daangnDao.getProfileInfo(1);
             // admin인 1로 우선 하드코딩
             return getInfoProfileRes;
+        } catch (Exception e) {
+            System.out.println(e);
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    // 나의당근 - 프로필 하단 리뷰정보 GET
+    public GetInfoReviewRes getReviewInfo() throws BaseException {
+        try {
+            GetInfoReviewRes getInfoReviewRes = daangnDao.getReviewInfo(1);
+            return getInfoReviewRes;
         } catch (Exception e) {
             System.out.println(e);
             throw new BaseException(DATABASE_ERROR);
