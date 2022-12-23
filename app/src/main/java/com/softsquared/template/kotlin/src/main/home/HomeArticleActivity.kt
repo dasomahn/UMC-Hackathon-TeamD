@@ -51,6 +51,10 @@ class HomeArticleActivity :
                         }
                         if(result.wantNego == "Y")
                             binding.nego.text = "가격제안 가능"
+                        if(result.type != "ACTIVE")
+                        {
+                            binding.status.visibility = View.VISIBLE
+                        }
                     }
                 }
 

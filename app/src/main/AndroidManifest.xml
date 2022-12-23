@@ -15,6 +15,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".src.main.townLife.TownLifeArticleActivity"
+            android:exported="false" />
+        <activity
             android:name=".src.main.townLife.TownLifeCategoryActivity"
             android:exported="false" />
         <activity
@@ -22,6 +25,9 @@
             android:exported="false" />
         <activity
             android:name=".src.main.myPage.MyPageProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".src.main.home.HomeArticleActivity"
             android:exported="false" />
         <activity
             android:name=".src.splash.SplashActivity"

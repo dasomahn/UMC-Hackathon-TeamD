@@ -1,17 +1,19 @@
 package com.softsquared.template.kotlin.src.main.home
 
+import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.softsquared.template.kotlin.R
-import com.softsquared.template.kotlin.config.BaseFragment
 import com.softsquared.template.kotlin.databinding.FragmentHomeBinding
-import com.softsquared.template.kotlin.src.main.MainActivity
-import com.softsquared.template.kotlin.src.main.home.models.PostSignUpRequest
-import com.softsquared.template.kotlin.src.main.home.models.SignUpResponse
-import com.softsquared.template.kotlin.src.main.home.models.UserResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -25,18 +27,44 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 val dataList: ArrayList<ArticleModel> = arrayListOf()
                 val articleAdapter = ArticleAdapter(dataList)
 
-                dataList.apply {
-                        add(ArticleModel("게시글 내용입니다.","강남", 2000))
-                        add(ArticleModel("게시글 내용2", "개포", 3000))
-                        add(ArticleModel("게시글 내용3", "개포", 2000))
-                        add(ArticleModel("게시글 내용4", "개포", 2000))
-                        add(ArticleModel("게시글 내용5", "개포",2000))
-                        add(ArticleModel("게시글 내용..", "개포",2000))
+                val join = Retrofit.Builder()
+                        .baseUrl("http://3.38.32.124/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build()
 
-                }
-                articleAdapter.notifyItemInserted(dataList.size)
+                join.create(HomeFragmentInterface::class.java)
+                        .getHomeArticleList()
+                        .enqueue(object : Callback<HomeArticleListResponse> {
+                                override fun onResponse(call: Call<HomeArticleListResponse>, response: Response<HomeArticleListResponse>) {
+                                        Log.d(
+                                                ContentValues.TAG, "onResponse: \n${response.body()}"
+                                        )
+
+                                        if(response.body() != null && response.body()!!.isSuccess) {
+                                                for(data in response.body()!!.result)
+                                                {
+                                                        dataList.add(ArticleModel(data.idx, data.title, data.region, data.price))
+                                                        articleAdapter.notifyItemInserted(dataList.size)
+                                                }
+                                        }
+                                }
+
+                                override fun onFailure(call: Call<HomeArticleListResponse>, t: Throwable) {
+                                        Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+                                }
+                        })
 
                 binding.rvData.adapter = articleAdapter
                 binding.rvData.layoutManager = LinearLayoutManager(activity)
+
+                articleAdapter.setArticleClickListener(object : ArticleAdapter.ArticleClickListener {
+                        override fun onArticleClick(position: Int) {
+                                val intent = Intent(this@HomeFragment.context, HomeArticleActivity::class.java)
+
+                                intent.putExtra("idx", dataList[position].idx)
+
+                                startActivity(intent)
+                        }
+                })
         }
 }

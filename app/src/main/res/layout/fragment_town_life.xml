@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/town_life_layout_top"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:orientation="horizontal"
 
         app:layout_constraintTop_toTopOf="parent"
@@ -20,17 +20,18 @@
         <TextView
             android:id="@+id/town_life_txt_my_town"
             android:layout_width="wrap_content"
-            android:layout_height="38dp"
+            android:layout_height="match_parent"
             android:paddingStart="10dp"
             android:paddingTop="5dp"
             android:text="동네"
             android:textColor="@color/black"
+            android:gravity="center_vertical"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <ImageView
             android:layout_width="28dp"
-            android:layout_height="38dp"
+            android:layout_height="match_parent"
             android:paddingRight="6dp"
             android:src="@drawable/ic_down_arrow" />
 
@@ -42,22 +43,22 @@
 
         <ImageView
             android:id="@+id/town_life_btn_search"
-            android:layout_width="28dp"
-            android:layout_height="38dp"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
             android:paddingRight="10dp"
             android:src="@drawable/icon_search" />
 
         <ImageView
             android:id="@+id/town_life_btn_menu"
-            android:layout_width="28dp"
-            android:layout_height="38dp"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
             android:paddingRight="10dp"
             android:src="@drawable/tab_icon_profile" />
 
         <ImageView
             android:id="@+id/town_life_btn_notice"
-            android:layout_width="28dp"
-            android:layout_height="38dp"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
             android:paddingRight="10dp"
             android:src="@drawable/icon_notification" />
     </LinearLayout>
