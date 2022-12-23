@@ -97,7 +97,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginTop="5dp"
 
-        android:text="궁금해요"
+        android:text="답변하기"
         android:textSize="12sp"
 
         app:layout_constraintTop_toBottomOf="@id/item_town_life_article_info"

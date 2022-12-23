@@ -1,14 +1,24 @@
 package com.softsquared.template.kotlin.src.main.townLife
 
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.softsquared.template.kotlin.R
 import com.softsquared.template.kotlin.config.BaseFragment
 import com.softsquared.template.kotlin.databinding.FragmentTownLifeBinding
+import com.softsquared.template.kotlin.src.main.home.ArticleModel
+import com.softsquared.template.kotlin.src.main.home.HomeArticleListResponse
+import com.softsquared.template.kotlin.src.main.home.HomeFragmentInterface
 import com.softsquared.template.kotlin.src.main.myPage.MyPageProfileActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class TownLifeFragment :
     BaseFragment<FragmentTownLifeBinding>(FragmentTownLifeBinding::bind,
@@ -49,25 +59,33 @@ class TownLifeFragment :
         val townLifeDataList: ArrayList<TownLifeArticleItemHolder> = arrayListOf()
         val townLifeArticleAdapter = TownLifeArticleRVAdapter(townLifeDataList)
 
-        townLifeDataList.apply {
-            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
-            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
-            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
-            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
-            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
-            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
-            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
-            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
-            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
-            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
-            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
-            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
-            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
-            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
-            add(TownLifeArticleItemHolder("이건 내용입니다", "닉네임" + "·" + "지역", "카테고리"))
-        }
+        val join = Retrofit.Builder()
+            .baseUrl("http://3.38.32.124/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
-        townLifeArticleAdapter.notifyItemInserted(townLifeDataList.size)
+        join.create(TownLifeRetrofitInterface::class.java)
+            .getTownLifeArticleList()
+            .enqueue(object : Callback<TownLifeArticleListResponse> {
+                override fun onResponse(call: Call<TownLifeArticleListResponse>, response: Response<TownLifeArticleListResponse>) {
+                    Log.d(
+                        ContentValues.TAG, "onResponse: \n${response.body()}"
+                    )
+
+                    if(response.body() != null && response.body()!!.isSuccess) {
+                        for(data in response.body()!!.result)
+                        {
+                            townLifeDataList.add(TownLifeArticleItemHolder(data.content, data.nickname + "·" + data.region, data.cateName))
+                            townLifeArticleAdapter.notifyItemInserted(dataList.size)
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<TownLifeArticleListResponse>, t: Throwable) {
+                    Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+                }
+            })
+
         binding.mainPost.adapter = townLifeArticleAdapter
         binding.mainPost.layoutManager = GridLayoutManager(this.context, 2, GridLayoutManager.VERTICAL, false)
 
